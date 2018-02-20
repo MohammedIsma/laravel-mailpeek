@@ -1,0 +1,22 @@
+{
+    "name": "misma/laravel-mailpeek",
+    "description": "MailPeek provides a simple local inbox right in your browser to enable you preview  emails being sent from your application.",
+    "keywords": ["php","github","email","laravel","inbox","local email", "preview email", "email","laravel 5"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mohammed Isma",
+            "email": "mohammedismais@hotmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+   	"autoload": {
+        "psr-4": {
+          "Misma\\MailPeek\\": "src/"
+        }
+   	},
+    "require": {
+    	"php": "^5.5.0|^7.0",
+        "laravel/framework": "~5.5"
+    }
+}
