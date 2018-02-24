@@ -2,6 +2,7 @@
 
 namespace Misma\MailPeek;
 
+use Config;
 use Session;
 use Swift_Mailer;
 
@@ -17,7 +18,7 @@ class MailPeekMailProvider extends MailServiceProvider
         if ( 
             ($this->app['config']['mail.driver'] == 'mailpeek') && 
             ($this->app['config']['mailpeek.enabled'] == true) && 
-            in_array( env("APP_ENV") , $this->app['config']['mailpeek.enabled_environments'])
+            in_array( Config("app.env") , $this->app['config']['mailpeek.enabled_environments'])
         ){
             $this->registerPreviewSwiftMailer();
         } else {
