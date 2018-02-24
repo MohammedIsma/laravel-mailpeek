@@ -44,13 +44,16 @@ class MailPeekTransport extends Transport
 
         foreach ($message->getChildren() as $child) {
             
-            $file_name = str_replace('attachment; filename=', null, $child->getHeaders()->get('content-disposition')->getFieldBody());
-            $file_content = $child->getBody();
-            $file_path = "$this->files_path/".$Mail->getId()."/attachments/$file_name";
-            
-            $this->files->put( $file_path, $file_content );
-            
-            $Mail->addAttachment($file_name, $file_path);
+            $cd = $child->getHeaders()->get('content-disposition');
+            if($cd){
+                $file_name = str_replace('attachment; filename=', null, $child->getHeaders()->get('content-disposition')->getFieldBody());
+                $file_content = $child->getBody();
+                $file_path = "$this->files_path/".$Mail->getId()."/attachments/$file_name";
+                
+                $this->files->put( $file_path, $file_content );
+                
+                $Mail->addAttachment($file_name, $file_path);
+            }
         }
 
         $this->Mailbox->addEmailToMailbox($Mail);
