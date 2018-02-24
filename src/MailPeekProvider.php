@@ -2,6 +2,7 @@
 
 namespace Misma\MailPeek;
 
+use Config;
 use Illuminate\Support\ServiceProvider;
 
 class MailPeekProvider extends ServiceProvider
@@ -30,7 +31,7 @@ class MailPeekProvider extends ServiceProvider
     {
         $enabled_environs = is_array($this->app['config']['mailpeek.enabled_environments']) ? $this->app['config']['mailpeek.enabled_environments'] : ["local"];
         
-        if(in_array( env("APP_ENV") , $enabled_environs)){
+        if(in_array( Config::get("app.env") , $enabled_environs)){
             include __DIR__ . "/routes.php";
             $this->app->make("Misma\MailPeek\Controllers\MailPeekController");
             $this->mergeConfigFrom( __DIR__ . "/mailpeek-config.php", "mailpeek");
